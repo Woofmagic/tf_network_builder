@@ -5,7 +5,7 @@ from .prompts import ERROR_INVALID_LAYER_INPUT, ERROR_INVALID_NODES_INPUT, ERROR
 from .losses import _DICTIONARY_MAP_USER_INPUT_TO_KERAS_LOSS
 from .activations import _LIST_OF_ACCEPTABLE_ACTIVATION_FUNCTIONS
 
-def validate_config(configuration_dictionary: dict, verbose: bool):
+def validate_configuration(configuration_dictionary: dict, verbose: bool):
     """
     ## Description:
     Validate user's dict of initialization parameters.
