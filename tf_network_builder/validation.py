@@ -41,18 +41,18 @@ def validate_config(configuration_dictionary: dict, verbose: bool):
         if verbose:
             print("> Validated list of nodes per layer!")
 
-    activations = configuration_dictionary.get("activations")
+    proposed_activation_functions = configuration_dictionary.get("activations")
 
-    if not (isinstance(activations, list) and len(activations) == number_of_hidden_layers and all(act in ALLOWED_ACTIVATIONS for act in activations)):
+    if not (isinstance(proposed_activation_functions, list) and len(proposed_activation_functions) == number_of_hidden_layers and all(activation_function in _LIST_OF_ACCEPTABLE_ACTIVATION_FUNCTIONS for activation_function in proposed_activation_functions)):
         raise ValueError(ERROR_ACTIVATION_MISMATCH)
     
     else:
         if verbose:
             print("> Validated list of activations!")
 
-    loss_name = configuration_dictionary.get("loss")
+    proposed_loss_function = configuration_dictionary.get("loss")
 
-    if loss_name not in _DICTIONARY_MAP_USER_INPUT_TO_KERAS_LOSS:
+    if proposed_loss_function not in _DICTIONARY_MAP_USER_INPUT_TO_KERAS_LOSS:
         raise ValueError(ERROR_UNKNOWN_LOSS)
     else:
         if verbose:
@@ -66,8 +66,8 @@ def validate_config(configuration_dictionary: dict, verbose: bool):
     return {
         "num_layers": number_of_hidden_layers,
         "nodes_per_layer": nodes_per_layer,
-        "activations": activations,
-        "loss": _DICTIONARY_MAP_USER_INPUT_TO_KERAS_LOSS[loss_name],
+        "activations": proposed_activation_functions,
+        "loss": _DICTIONARY_MAP_USER_INPUT_TO_KERAS_LOSS[proposed_loss_function],
         "input_dim": network_input_dimension,
     }
 
