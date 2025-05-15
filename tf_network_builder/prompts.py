@@ -9,3 +9,7 @@ ERROR_INVALID_LAYER_INPUT = "> Layer number must be a positive, nonzero integer.
 #  | the number of nodes *per hidden layer* that must be supplied.
 PROMPT_NODES_PER_LAYER = "> Choose how many nodes you want for layer {}."
 ERROR_INVALID_NODES_INPUT = "> Number of nodes per layer must be an integer type. Try again."
+
+# (3): The third prompt asks the user to provide layer-wise activation functions.
+ERROR_ACTIVATION_MISMATCH = "> Provided activations must match number of layers and use only known functions."
+ERROR_UNKNOWN_LOSS = "> Provided loss function is not in the known list."
