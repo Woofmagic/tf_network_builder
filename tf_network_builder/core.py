@@ -25,11 +25,11 @@ class TFNetworkBuilder:
     def _initialize_from_config(self, configuration_dict: dict):
         validated = validate_configuration(configuration_dict, self.verbose)
 
-        self.number_of_hidden_layers = validated["num_layers"]
+        self.number_of_hidden_layers = validated["number_of_hidden_layers"]
         self.list_of_number_of_nodes_per_layer = validated["nodes_per_layer"]
-        self.list_of_activation_functions_for_each_layer = validated["activations"]
-        self.model_loss_function = validated["loss"]
-        self.number_of_input_variables = validated["input_dim"]
+        self.list_of_activation_functions_for_each_layer = validated["activation_per_layer"]
+        self.model_loss_function = validated["loss_function"]
+        self.number_of_input_variables = validated["input_dimension"]
 
         if self.verbose:
             print(f"> Network initialized from config: {validated}")

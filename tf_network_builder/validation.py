@@ -41,7 +41,7 @@ def validate_configuration(configuration_dictionary: dict, verbose: bool):
         if verbose:
             print("> Validated list of nodes per layer!")
 
-    proposed_activation_functions = configuration_dictionary.get("activations")
+    proposed_activation_functions = configuration_dictionary.get("activation_per_layer")
 
     if not (isinstance(proposed_activation_functions, list) and len(proposed_activation_functions) == number_of_hidden_layers and all(activation_function in _LIST_OF_ACCEPTABLE_ACTIVATION_FUNCTIONS for activation_function in proposed_activation_functions)):
         raise ValueError(ERROR_ACTIVATION_MISMATCH)
@@ -50,7 +50,7 @@ def validate_configuration(configuration_dictionary: dict, verbose: bool):
         if verbose:
             print("> Validated list of activations!")
 
-    proposed_loss_function = configuration_dictionary.get("loss")
+    proposed_loss_function = configuration_dictionary.get("loss_function")
 
     if proposed_loss_function not in _DICTIONARY_MAP_USER_INPUT_TO_KERAS_LOSS:
         raise ValueError(ERROR_UNKNOWN_LOSS)
@@ -64,11 +64,11 @@ def validate_configuration(configuration_dictionary: dict, verbose: bool):
         raise ValueError("> Input dimension must be a positive integer.")
 
     return {
-        "num_layers": number_of_hidden_layers,
+        "number_of_hidden_layers": number_of_hidden_layers,
         "nodes_per_layer": nodes_per_layer,
-        "activations": proposed_activation_functions,
-        "loss": _DICTIONARY_MAP_USER_INPUT_TO_KERAS_LOSS[proposed_loss_function],
-        "input_dim": network_input_dimension,
+        "activation_per_layer": proposed_activation_functions,
+        "loss_function": _DICTIONARY_MAP_USER_INPUT_TO_KERAS_LOSS[proposed_loss_function],
+        "input_dimension": network_input_dimension,
     }
 
 def get_positive_integer(prompt_template, error_message, preprovided_value = None, verbose: bool = False):
