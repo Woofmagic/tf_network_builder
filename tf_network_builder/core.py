@@ -2,7 +2,7 @@
 
 from .prompts import PROMPT_NUMBER_OF_LAYERS, ERROR_INVALID_LAYER_INPUT, PROMPT_NODES_PER_LAYER, ERROR_INVALID_NODES_INPUT
 
-from .validation import get_positive_integer, get_layerwise_integers
+from .validation import validate_configuration, get_positive_integer, get_layerwise_integers
 
 class TFNetworkBuilder:
     """
@@ -23,7 +23,7 @@ class TFNetworkBuilder:
             self._initialize_from_config(configuration)
 
     def _initialize_from_config(self, configuration_dict: dict):
-        validated = validate_config(configuration_dict)
+        validated = validate_configuration(configuration_dict, self.verbose)
 
         self.number_of_hidden_layers = validated["num_layers"]
         self.list_of_number_of_nodes_per_layer = validated["nodes_per_layer"]
