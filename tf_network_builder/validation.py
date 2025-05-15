@@ -2,8 +2,8 @@
 
 
 from .prompts import ERROR_INVALID_LAYER_INPUT, ERROR_INVALID_NODES_INPUT, ERROR_ACTIVATION_MISMATCH, ERROR_UNKNOWN_LOSS
-from .losses import LOSS_FUNCTION_MAP
-from .activations import ALLOWED_ACTIVATIONS
+from .losses import _DICTIONARY_MAP_USER_INPUT_TO_KERAS_LOSS
+from .activations import _LIST_OF_ACCEPTABLE_ACTIVATION_FUNCTIONS
 
 def validate_config(configuration_dictionary: dict, verbose: bool):
     """
@@ -52,7 +52,7 @@ def validate_config(configuration_dictionary: dict, verbose: bool):
 
     loss_name = configuration_dictionary.get("loss")
 
-    if loss_name not in LOSS_FUNCTION_MAP:
+    if loss_name not in _DICTIONARY_MAP_USER_INPUT_TO_KERAS_LOSS:
         raise ValueError(ERROR_UNKNOWN_LOSS)
     else:
         if verbose:
@@ -67,7 +67,7 @@ def validate_config(configuration_dictionary: dict, verbose: bool):
         "num_layers": number_of_hidden_layers,
         "nodes_per_layer": nodes_per_layer,
         "activations": activations,
-        "loss": LOSS_FUNCTION_MAP[loss_name],
+        "loss": _DICTIONARY_MAP_USER_INPUT_TO_KERAS_LOSS[loss_name],
         "input_dim": network_input_dimension,
     }
 
