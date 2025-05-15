@@ -23,7 +23,7 @@ def validate_configuration(configuration_dictionary: dict, verbose: bool):
     """
     
     try:
-        number_of_hidden_layers = int(configuration_dictionary["num_layers"])
+        number_of_hidden_layers = int(configuration_dictionary["number_of_hidden_layers"])
         if number_of_hidden_layers <= 0:
             raise ValueError(ERROR_INVALID_LAYER_INPUT)
         
