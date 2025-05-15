@@ -23,12 +23,29 @@ class TFNetworkBuilder:
             self._initialize_from_config(configuration)
 
     def _initialize_from_config(self, configuration_dict: dict):
-        validated = validate_configuration(configuration_dict, self.verbose)
+        try:
 
+            # (): Pass the dictionary into the validation function:
+            validated = validate_configuration(configuration_dict, self.verbose)
+
+        except Exception as error:
+
+            # (): Too general, yes, but not sure what we put here yet:
+            raise Exception("> Error occurred during validation...") from error
+
+        # (): Extract the number of hidden layers in the network:
         self.number_of_hidden_layers = validated["number_of_hidden_layers"]
+
+        # (): Extract the list of number of nodes per layer:
         self.list_of_number_of_nodes_per_layer = validated["nodes_per_layer"]
+
+        # (): Extract the number of activation functions per layer:
         self.list_of_activation_functions_for_each_layer = validated["activation_per_layer"]
+
+        # (): Extract the models' loss/objective function as a string:
         self.model_loss_function = validated["loss_function"]
+
+        # (): Extract an integer representing the number of inputs into the network:
         self.number_of_input_variables = validated["input_dimension"]
 
         if self.verbose:

@@ -27,8 +27,8 @@ def validate_configuration(configuration_dictionary: dict, verbose: bool):
         if number_of_hidden_layers <= 0:
             raise ValueError(ERROR_INVALID_LAYER_INPUT)
         
-    except Exception:
-        raise ValueError(ERROR_INVALID_LAYER_INPUT)
+    except Exception as error:
+        raise ValueError(ERROR_INVALID_LAYER_INPUT) from error
 
     # (): We now retrieve the *list* of integers characterising nodes per hidden layer:
     nodes_per_layer = configuration_dictionary.get("nodes_per_layer")
